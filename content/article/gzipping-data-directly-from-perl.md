@@ -21,7 +21,7 @@ Perl can read and write gzipped streams through its IO layers. [Nicholas Clark](
 
 ### The pipe way
 
-Perl is versatile, and being the Unix duct tape that it is, reading or writing from the standard filehandles is easy. You might know about the three-argument [open](http://perldoc.perl.org/functions/open.html), but I can give it as many arguments as I like. For a piped open, I can set the mode as the second argument and the command as a list as I would for [system](http://perldoc.perl.org/functions/system.html) (see the "Secure Programming Chapter" of [Mastering Perl](http://www.masteringperl.org)). I remember where to put the `-` on the side of the `|` where the command would go:
+Perl is versatile, and being the Unix duct tape that it is, reading or writing from the standard filehandles is easy. You might know about the three-argument [open]({{</* perlfunc "open" */>}}), but I can give it as many arguments as I like. For a piped open, I can set the mode as the second argument and the command as a list as I would for [system]({{</* perlfunc "system" */>}}) (see the "Secure Programming Chapter" of [Mastering Perl](http://www.masteringperl.org)). I remember where to put the `-` on the side of the `|` where the command would go:
 
 ```perl
 $ENV{PATH} = '';
@@ -32,7 +32,7 @@ while( <$z> ) {
     print;
     }
 
-close $z 
+close $z
     or die "There was a problem with the pipe open!";
 ```
 
@@ -47,7 +47,7 @@ while(  ) {
     print { $z } $_;
     }
 
-close $z 
+close $z
     or die "There was a problem with the pipe open!";
 ```
 
@@ -58,7 +58,7 @@ That's the general form that I can use with any sort of command. It has the draw
 To read a gzippped file in Perl, I can use the `gzip` I/O layer (see [perlopen](http://perldoc.perl.org/perlopentut.html)). Once I open the file, I can read its lines (assuming it's text) like I would a "normal" text file:
 
 ```perl
-open my $fh, '<:gzip' $filename 
+open my $fh, '<:gzip' $filename
     or die "Could not read from $filename: $!";
 
 while( <$fh> ) {
@@ -69,7 +69,7 @@ while( <$fh> ) {
 Or, I can read octets if the data aren't text:
 
 ```perl
-open my $fh, '<:gzip' $filename 
+open my $fh, '<:gzip' $filename
     or die "Could not read from $filename: $!";
 
 while( read( $fh, $buffer, 1024 ) ) {
@@ -97,7 +97,7 @@ The I/O layer is faster than the module, but the PerlIO documentation notes that
 I can also directly write gzipped data to a file. It's similar my previous examples with the filehandles moved around. This one uses the I/O layer:
 
 ```perl
-open my $fh, '>:gzip' $filename 
+open my $fh, '>:gzip' $filename
     or die "Could not write to $filename: $!";
 
 while(  ) {
@@ -127,7 +127,7 @@ use IO::Uncompress::Gunzip qw($GunzipError);
 
 my $z = IO::Uncompress::Gunzip->new( *STDIN, MultiStream => 1 )
     or die "Could not make uncompress object: $GunzipError";
-    
+
 while( <$z> ) {
     print;
     }
