@@ -21,7 +21,7 @@ Perl can read and write gzipped streams through its IO layers. [Nicholas Clark](
 
 ### The pipe way
 
-Perl is versatile, and being the Unix duct tape that it is, reading or writing from the standard filehandles is easy. You might know about the three-argument [open]({{< perlfunc "open" >}}), but I can give it as many arguments as I like. For a piped open, I can set the mode as the second argument and the command as a list as I would for [system]({{< perlfunc "system" >}}) (see the "Secure Programming Chapter" of [Mastering Perl](http://www.masteringperl.org)). I remember where to put the `-` on the side of the `|` where the command would go:
+Perl is versatile, and being the Unix duct tape that it is, reading or writing from the standard filehandles is easy. You might know about the three-argument [open]({{< perlfunc "open" >}}), but I can give it as many arguments as I like. For a piped open, I can set the mode as the second argument and the command as a list as I would for [system]({{< perlfunc "system" >}}) (see the "Secure Programming Chapter" of [Mastering Perl](https://www.masteringperl.org)). I remember where to put the `-` on the side of the `|` where the command would go:
 
 ```perl
 $ENV{PATH} = '';
@@ -77,7 +77,7 @@ while( read( $fh, $buffer, 1024 ) ) {
     }
 ```
 
-If I can't use the I/O layers, perhaps because the operating system does not support it or it's broken on my version of Perl, I can use the [IO::Compress]({{<mcpan "IO::Compress" >}}) modules instead. This example uses its object interface to create the write filehandle:
+If I can't use the I/O layers, perhaps because the operating system does not support it or it's broken on my version of Perl, I can use the IO::Compress modules instead. This example uses its object interface to create the write filehandle:
 
 ```perl
 use IO::Compress::Gunzip;
@@ -120,7 +120,7 @@ while(  ) {
 
 ### An advanced tip
 
-I can read multiple streams of gzipped data with a single filehandle. The `MultiStream` option in [IO::Compress::Gunzip]({{<mcpan "IO::Compress::Gunzip" >}}) allows the decompressor to reset itself when it thinks it has detected a new stream and continue to provide output:
+I can read multiple streams of gzipped data with a single filehandle. The `MultiStream` option in [IO::Uncompress::Gunzip]({{<mcpan "IO::Uncompress::Gunzip" >}}) allows the decompressor to reset itself when it thinks it has detected a new stream and continue to provide output:
 
 ```perl
 use IO::Uncompress::Gunzip qw($GunzipError);
